@@ -293,8 +293,6 @@ namespace FontStashSharp.RichText
 
 		public TextLine GetLineByCursorPosition(int cursorPosition)
 		{
-			Update();
-
 			if (Lines.Count == 0)
 			{
 				return null;
@@ -324,20 +322,19 @@ namespace FontStashSharp.RichText
 				return null;
 			}
 
-			Update();
+			if (y < 0) return null;
 
-			var py = 0;
 			for (var i = 0; i < Lines.Count; ++i)
 			{
 				var s = Lines[i];
 
-				if (py <= y && y < py + s.Size.Y)
+				if (y < s.Size.Y)
 				{
 					return s;
 				}
 
-				py += s.Size.Y;
-				py += VerticalSpacing;
+				y -= s.Size.Y;
+				y -= VerticalSpacing;
 			}
 
 			return null;

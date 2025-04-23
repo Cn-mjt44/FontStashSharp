@@ -83,11 +83,11 @@ namespace FontStashSharp.RichText
 			return Glyphs[index];
 		}
 
-		public int? GetGlyphIndexByX(int x)
+		public int GetGlyphIndexByX(int x)
 		{
 			if (Glyphs.Count == 0 || x < 0)
 			{
-				return null;
+				return 0;
 			}
 
 			var i = 0;

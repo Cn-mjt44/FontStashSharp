@@ -42,37 +42,28 @@ namespace FontStashSharp.RichText
 			return null;
 		}
 
-		public int? GetGlyphIndexByX(int startX)
+
+		public BaseChunk GetBaseChunkByX(int x)
 		{
 			if (Chunks.Count == 0)
 			{
 				return null;
 			}
 
-			var x = startX;
 			for (var i = 0; i < Chunks.Count; ++i)
 			{
-				var chunk = (TextChunk)Chunks[i];
-
+				var chunk = Chunks[i];
 				if (x >= chunk.Size.X)
 				{
 					x -= chunk.Size.X;
 				}
 				else
 				{
-					if (chunk.Glyphs.Count > 0 && x < chunk.Glyphs[0].Bounds.X)
-					{
-						// Before first glyph
-						return 0;
-					}
-
-					return chunk.GetGlyphIndexByX(x);
+					return chunk;
 				}
 			}
 
-			// Use last chunk
-			x = startX;
-			return ((TextChunk)Chunks[Chunks.Count - 1]).GetGlyphIndexByX(startX);
+			return null;
 		}
 	}
 }
