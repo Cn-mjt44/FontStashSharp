@@ -2,7 +2,6 @@ using FontStashSharp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using FontStashSharp.Rasterizers.StbTrueTypeSharp;
 using System.Runtime.InteropServices;
 
 #if MONOGAME || FNA
@@ -65,13 +64,7 @@ namespace FontStashSharp
 
 			if (_settings.FontLoader == null)
 			{
-				var loaderSettings = new StbTrueTypeSharpSettings
-				{
-					KernelWidth = _settings.KernelWidth,
-					KernelHeight = _settings.KernelHeight,
-					UseOldRasterizer = _settings.StbTrueTypeUseOldRasterizer
-				};
-				_fontLoader = new StbTrueTypeSharpLoader(loaderSettings);
+				throw new ArgumentNullException(nameof(settings.FontLoader));
 			}
 			else
 			{
